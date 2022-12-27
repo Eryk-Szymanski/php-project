@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 30 Lis 2022, 10:04
--- Wersja serwera: 10.4.24-MariaDB
--- Wersja PHP: 8.1.6
+-- Generation Time: Dec 27, 2022 at 02:03 PM
+-- Server version: 10.4.17-MariaDB
+-- PHP Version: 8.0.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Baza danych: `wsb_php_st_adminlte`
+-- Database: `wsb_php_st_adminlte`
 --
 
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla tabeli `cities`
+-- Table structure for table `cities`
 --
 
 CREATE TABLE `cities` (
@@ -34,7 +34,7 @@ CREATE TABLE `cities` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Zrzut danych tabeli `cities`
+-- Dumping data for table `cities`
 --
 
 INSERT INTO `cities` (`id`, `state_id`, `city`) VALUES
@@ -960,7 +960,54 @@ INSERT INTO `cities` (`id`, `state_id`, `city`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla tabeli `users`
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `user_id` int(10) UNSIGNED NOT NULL,
+  `product_ids` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`product_ids`)),
+  `final_price` int(10) UNSIGNED NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `products`
+--
+
+CREATE TABLE `products` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `description` varchar(300) NOT NULL,
+  `price` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `roles`
+--
+
+CREATE TABLE `roles` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `role` enum('admin','superuser','user') CHARACTER SET utf8 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `roles`
+--
+
+INSERT INTO `roles` (`id`, `role`) VALUES
+(1, 'admin'),
+(2, 'superuser'),
+(3, 'user');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -969,61 +1016,133 @@ CREATE TABLE `users` (
   `name` varchar(40) NOT NULL,
   `surname` varchar(50) NOT NULL,
   `email` varchar(60) NOT NULL,
+  `role_id` int(10) UNSIGNED NOT NULL DEFAULT 3,
   `pass` varchar(100) NOT NULL,
   `birthday` date NOT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Zrzut danych tabeli `users`
+-- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `city_id`, `name`, `surname`, `email`, `pass`, `birthday`, `created_at`) VALUES
-(1, 2, 'eryk', 'szymanski', 'e@e.pl', '123', '2022-10-21', '2022-11-30 10:04:15');
+INSERT INTO `users` (`id`, `city_id`, `name`, `surname`, `email`, `role_id`, `pass`, `birthday`, `created_at`) VALUES
+(22, 776, 'eryk', 'szyman', 'ers@ers.pl', 1, '$argon2id$v=19$m=65536,t=4,p=1$cExzaEl4RzBSMC9HOFpMQw$ox/Tm2XxvZQUChdXiozblnD89YiUOkNPk681NCvKWpI', '2323-02-11', '2022-12-27 11:54:29'),
+(23, 853, 'user', 'userski', 'us@us.com', 3, '$argon2id$v=19$m=65536,t=4,p=1$ZjE0NmJ0MEJFaTQ0OGQzNQ$fQb3AInnRFo+wB3qGCJbcGd2/lKX03TyqnuSRrT7Nm8', '3212-12-31', '2022-12-27 13:46:03');
+
+-- --------------------------------------------------------
 
 --
--- Indeksy dla zrzutów tabel
+-- Table structure for table `woods`
+--
+
+CREATE TABLE `woods` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `description` varchar(300) NOT NULL,
+  `price_multiplier` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Indexes for dumped tables
 --
 
 --
--- Indeksy dla tabeli `cities`
+-- Indexes for table `cities`
 --
 ALTER TABLE `cities`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeksy dla tabeli `users`
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `roles`
+--
+ALTER TABLE `roles`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `email` (`email`),
-  ADD KEY `city_id` (`city_id`);
+  ADD KEY `city_id` (`city_id`),
+  ADD KEY `role` (`role_id`);
 
 --
--- AUTO_INCREMENT dla zrzuconych tabel
+-- Indexes for table `woods`
+--
+ALTER TABLE `woods`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT dla tabeli `cities`
+-- AUTO_INCREMENT for table `cities`
 --
 ALTER TABLE `cities`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1024;
 
 --
--- AUTO_INCREMENT dla tabeli `users`
+-- AUTO_INCREMENT for table `orders`
 --
-ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+ALTER TABLE `orders`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- Ograniczenia dla zrzutów tabel
+-- AUTO_INCREMENT for table `products`
+--
+ALTER TABLE `products`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `roles`
+--
+ALTER TABLE `roles`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+
+--
+-- AUTO_INCREMENT for table `woods`
+--
+ALTER TABLE `woods`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- Constraints for dumped tables
 --
 
 --
--- Ograniczenia dla tabeli `users`
+-- Constraints for table `orders`
+--
+ALTER TABLE `orders`
+  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `users`
 --
 ALTER TABLE `users`
-  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`city_id`) REFERENCES `cities` (`id`);
+  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`city_id`) REFERENCES `cities` (`id`),
+  ADD CONSTRAINT `users_ibfk_2` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
