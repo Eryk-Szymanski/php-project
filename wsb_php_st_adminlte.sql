@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 27, 2022 at 02:03 PM
+-- Generation Time: Dec 28, 2022 at 12:21 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.0
 
@@ -965,11 +965,29 @@ INSERT INTO `cities` (`id`, `state_id`, `city`) VALUES
 
 CREATE TABLE `orders` (
   `id` int(10) UNSIGNED NOT NULL,
+  `number` varchar(30) NOT NULL,
   `user_id` int(10) UNSIGNED NOT NULL,
-  `product_ids` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`product_ids`)),
-  `final_price` int(10) UNSIGNED NOT NULL,
+  `products` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`products`)),
+  `final_price` float UNSIGNED NOT NULL,
+  `comment` varchar(300) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `surname` varchar(150) NOT NULL,
+  `zipcode` varchar(6) NOT NULL,
+  `city_id` int(10) UNSIGNED NOT NULL,
+  `street` varchar(150) NOT NULL,
+  `building` varchar(10) NOT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `number`, `user_id`, `products`, `final_price`, `comment`, `name`, `surname`, `zipcode`, `city_id`, `street`, `building`, `created_at`) VALUES
+(1, '2712222200', 23, '[{\"wood\": 1, \"product_id\": 1}]', 23, 'szybko proszę', 'eryk', 'szymanski', '39-239', 1, 'koscianska', '1273a', '2022-12-27 21:49:26'),
+(2, '271220222335', 23, '[{\"wood\":1,\"product_id\":1}]', 0, 'a', 'a', 'a', 'a', 2, 'a', 'a', '2022-12-27 23:52:27'),
+(3, '271220222335', 23, '[{\"wood\":1,\"product_id\":1}]', 0, 'b', 'b', 'b', 'b', 2, 'b', 'b', '2022-12-27 23:53:22'),
+(4, '271220222335', 23, '[{\"wood\":1,\"product_id\":1}]', 0, 'c', 'c', 'c', 'c', 2, 'c', 'c', '2022-12-27 23:53:51');
 
 -- --------------------------------------------------------
 
@@ -981,8 +999,16 @@ CREATE TABLE `products` (
   `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(100) NOT NULL,
   `description` varchar(300) NOT NULL,
-  `price` int(10) UNSIGNED NOT NULL
+  `price` float UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`id`, `name`, `description`, `price`) VALUES
+(1, 'Deski', 'Cienkie, mocne', 14),
+(2, 'Klapki', 'Dobre do palenia', 15);
 
 -- --------------------------------------------------------
 
@@ -1040,8 +1066,15 @@ CREATE TABLE `woods` (
   `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(100) NOT NULL,
   `description` varchar(300) NOT NULL,
-  `price_multiplier` int(10) UNSIGNED NOT NULL
+  `price_multiplier` float UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `woods`
+--
+
+INSERT INTO `woods` (`id`, `name`, `description`, `price_multiplier`) VALUES
+(1, 'Dąb', 'Dobry, mocny', 1);
 
 --
 -- Indexes for dumped tables
@@ -1058,7 +1091,8 @@ ALTER TABLE `cities`
 --
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `user_id` (`user_id`);
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `city_id` (`city_id`);
 
 --
 -- Indexes for table `products`
@@ -1101,13 +1135,13 @@ ALTER TABLE `cities`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -1125,7 +1159,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `woods`
 --
 ALTER TABLE `woods`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
@@ -1135,7 +1169,8 @@ ALTER TABLE `woods`
 -- Constraints for table `orders`
 --
 ALTER TABLE `orders`
-  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`city_id`) REFERENCES `cities` (`id`);
 
 --
 -- Constraints for table `users`

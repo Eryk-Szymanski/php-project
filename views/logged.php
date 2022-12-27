@@ -22,11 +22,11 @@
         $sql = "SELECT orders.number FROM `orders` WHERE `user_id` = $_SESSION[user_id]";
         $result = $mysqli->query($sql);
         echo <<< INFO
-        <button><a href="./new-order.php">nowe zamówienie</a></button>
+        <h5><a href="./products.php">Wszystkie produkty</a></h5>
         <h3>twoje zamówienia</h3>
 INFO;
         while ($order = $result->fetch_assoc()) {
-          echo "<a href='./order-details.php?$order[number]'>$order[number]</a>";
+          echo "<a href='./order-details.php?number=$order[number]'>$order[number]</a><br>";
         }
       }
       elseif ($_SESSION['user_role'] == 'superuser') {

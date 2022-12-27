@@ -15,28 +15,14 @@
 </head>
 <body>
   <?php
-    if (isset($_SESSION['success'])) {
-      echo "<p>Witaj $_SESSION[user_name]</p>";
-      if ($_SESSION['user_role'] == 'user') {
-        require_once '../scripts/connect.php';
-        $sql = "SELECT * FROM `orders` WHERE `user_id` = $_SESSION[user_id]";
-        $result = $mysqli->query($sql);
-        echo <<< INFO
-        <button><a href="./new-order.php">nowe zamówienie</a></button>
-        <h3>twoje zamówienia</h3>
+    if (isset($_GET['number'])) {
+      require_once '../scripts/connect.php';
+      $sql = "SELECT * FROM `orders` WHERE `number` = $_GET[number]";
+      $result = $mysqli->query($sql);
+      $order = $result->fetch_assoc();
+      echo <<< INFO
+        <p>$order[products]</p>
 INFO;
-        while ($order = $result->fetch_assoc()) {
-          echo "<a href='./order-details.php?$order[number]'>$order[number]</a>";
-        }
-      }
-      elseif ($_SESSION['user_role'] == 'superuser') {
-        echo <<< INFO
-INFO;
-      }
-      elseif ($_SESSION['user_role'] == 'admin') {
-        echo <<< INFO
-INFO;
-      }
     }
   ?>
 </body>
