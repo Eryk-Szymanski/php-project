@@ -13,10 +13,34 @@
   ?>
   
 </head>
-<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+<body>
   <?php
-    echo ($_SESSION['success']);
-    echo ($_SESSION['role']);
+    if (isset($_SESSION['success'])) {
+      echo "<p>Witaj $_SESSION[user_name]</p>";
+      if ($_SESSION['user_role'] == 'user') {
+        require_once '../scripts/connect.php';
+        $sql = "SELECT * FROM `orders` WHERE `user_id` = $_SESSION[user_id]";
+        $result = $mysqli->query($sql);
+        $orders = $result->fetch_assoc();
+        echo <<< INFO
+        <button><a href="./new-order.php">nowe zamówienie</a></button>
+        <h3>twoje zamówienia</h3>
+        <?php
+          while ($order = $result->fetch_assoc()) {
+            echo "$order[final_price]";
+          }
+        ?>
+INFO;
+      }
+      elseif ($_SESSION['user_role'] == 'superuser') {
+        echo <<< INFO
+INFO;
+      }
+      elseif ($_SESSION['user_role'] == 'admin') {
+        echo <<< INFO
+INFO;
+      }
+    }
   ?>
 </body>
 </html>

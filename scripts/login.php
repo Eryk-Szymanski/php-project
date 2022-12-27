@@ -26,7 +26,9 @@
 
         if ($stmt->affected_rows == 1 && password_verify($_POST['pass'], $user['pass'])) {
             $_SESSION['success'] = "Prawidłowo zalogował się użytkownik $_POST[email]";
-            $_SESSION['role'] = $user['role'];
+            $_SESSION['user_role'] = $user['role'];
+            $_SESSION['user_name'] = $user['name'];
+            $_SESSION['user_id'] = $user['id'];
             header('location: ../views/logged.php');
             exit();
         } else {
