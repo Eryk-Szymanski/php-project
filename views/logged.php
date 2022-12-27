@@ -6,7 +6,7 @@
   <title>AdminLTE 3 | Dashboard 2</title>
 
   <?php
-    require_once '../style/style.css';
+    require_once '../style/style.css'
   ?>
   
 </head>
