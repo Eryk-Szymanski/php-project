@@ -18,7 +18,7 @@
     require_once 'connect.php';
     
     try {
-        $stmt = $mysqli->prepare("SELECT * FROM `users` JOIN `roles` ON users.role_id = roles.id WHERE `email` = ?");
+        $stmt = $mysqli->prepare("SELECT users.id, users.name, users.pass, roles.role FROM `users` JOIN `roles` ON users.role_id = roles.id WHERE `email` = ?");
         $stmt->bind_param("s", $_POST['email']);
         $stmt->execute();
         $result = $stmt->get_result();

@@ -19,7 +19,7 @@
       echo "<p>Witaj $_SESSION[user_name]</p>";
       if ($_SESSION['user_role'] == 'user') {
         require_once '../scripts/connect.php';
-        $sql = "SELECT orders.number FROM `orders` WHERE `user_id` = $_SESSION[user_id]";
+        $sql = "SELECT * FROM `orders` WHERE `user_id` = $_SESSION[user_id]";
         $result = $mysqli->query($sql);
         echo <<< INFO
         <button><a href="./new-order.php">nowe zamówienie</a></button>
