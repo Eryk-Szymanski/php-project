@@ -24,7 +24,7 @@ LOGOUT;
       echo "<p>Witaj $_SESSION[user_name]</p>";
       require_once '../scripts/connect.php';
       if ($_SESSION['user_role'] == 'user') {
-        $sql = "SELECT orders.number FROM `orders` WHERE `user_id` = $_SESSION[user_id]";
+        $sql = "SELECT orders.number FROM `orders` WHERE `user_id` = $_SESSION[user_id] ORDER BY created_at desc";
         $result = $mysqli->query($sql);
         echo <<< USER
         <h5><a href="./products.php">Wszystkie produkty</a></h5>

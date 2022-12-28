@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 28, 2022 at 03:31 PM
+-- Generation Time: Dec 28, 2022 at 05:20 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.0
 
@@ -987,7 +987,9 @@ CREATE TABLE `orders` (
 INSERT INTO `orders` (`id`, `number`, `status`, `user_id`, `products`, `final_price`, `comment`, `name`, `surname`, `zipcode`, `city_id`, `street`, `building`, `created_at`) VALUES
 (5, '20221228141220', 1, 23, '[{\"product_id\":1,\"quantity\":\"5\"},{\"product_id\":2,\"quantity\":\"4\"}]', 130, 'e', 'e', 'e', 'e', 2, 'e', 'e', '2022-12-28 14:15:20'),
 (6, '20221228141244', 2, 23, '[{\"product_id\":1,\"quantity\":\"5\"},{\"product_id\":2,\"quantity\":\"10\"}]', 220, 'ha', 'ha', 'ha', 'ha', 2, 'ha', 'ha', '2022-12-28 14:19:44'),
-(7, '20221228141230', 2, 23, '[{\"product_id\":1,\"quantity\":\"120\"},{\"product_id\":2,\"quantity\":\"500\"}]', 9180, 'er', 'er', 'er', 'er', 853, 'er', 'er', '2022-12-28 14:24:30');
+(7, '20221228141230', 2, 23, '[{\"product_id\":1,\"quantity\":\"120\"},{\"product_id\":2,\"quantity\":\"500\"}]', 9180, 'er', 'er', 'er', 'er', 853, 'er', 'er', '2022-12-28 14:24:30'),
+(8, '20221228171255', 1, 25, '[{\"product_id\":1,\"quantity\":\"8\"},{\"product_id\":2,\"quantity\":\"7\"}]', 217, 'hehe', 'jaro', 'uzaro', '127381', 2, 'abc', 'ddef', '2022-12-28 17:14:55'),
+(9, '20221228171252', 0, 25, '[{\"product_id\":1,\"quantity\":\"1\"},{\"product_id\":2,\"quantity\":\"5\"}]', 89, 'ghi', 'jars', 'uzars', '21837', 2, 'abc', 'def', '2022-12-28 17:19:52');
 
 -- --------------------------------------------------------
 
@@ -1055,7 +1057,8 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `city_id`, `name`, `surname`, `email`, `role_id`, `pass`, `birthday`, `created_at`) VALUES
 (22, 776, 'eryk', 'szyman', 'ers@ers.pl', 1, '$argon2id$v=19$m=65536,t=4,p=1$cExzaEl4RzBSMC9HOFpMQw$ox/Tm2XxvZQUChdXiozblnD89YiUOkNPk681NCvKWpI', '2323-02-11', '2022-12-27 11:54:29'),
 (23, 853, 'user', 'userski', 'us@us.com', 3, '$argon2id$v=19$m=65536,t=4,p=1$ZjE0NmJ0MEJFaTQ0OGQzNQ$fQb3AInnRFo+wB3qGCJbcGd2/lKX03TyqnuSRrT7Nm8', '3212-12-31', '2022-12-27 13:46:03'),
-(24, 599, 'super', 'user', 'su@su.com', 2, '$argon2id$v=19$m=65536,t=4,p=1$clBweUN5NnRiOFd3OTZrWQ$D5OZ294UGbhBvx2EPZveXstO7TzCcn2982WsTClT7qw', '3211-12-31', '2022-12-28 14:36:41');
+(24, 599, 'super', 'user', 'su@su.com', 2, '$argon2id$v=19$m=65536,t=4,p=1$clBweUN5NnRiOFd3OTZrWQ$D5OZ294UGbhBvx2EPZveXstO7TzCcn2982WsTClT7qw', '3211-12-31', '2022-12-28 14:36:41'),
+(25, 13, 'jarek', 'uzaro', 'jars@jars.pl', 3, '$argon2id$v=19$m=65536,t=4,p=1$RHR4NjFEL01XZFdHY0UzMg$aENZ7HbTHy45BnSVjnA64kBz+caq9xIcAx2CeRoS7ts', '3222-12-31', '2022-12-28 17:14:10');
 
 --
 -- Indexes for dumped tables
@@ -1110,7 +1113,7 @@ ALTER TABLE `cities`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -1128,7 +1131,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- Constraints for dumped tables

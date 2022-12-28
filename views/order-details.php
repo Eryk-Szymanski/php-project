@@ -26,8 +26,21 @@ LOGOUT;
       $sql = "SELECT orders.*, cities.city FROM `orders` JOIN `cities` ON cities.id = orders.city_id WHERE `number` = $_GET[number]";
       $result = $mysqli->query($sql);
       $order = $result->fetch_assoc();
+      $status_string = "";
+      switch($order['status']) {
+        case 0:
+          $status_string = "Czeka na akceptację";
+          break;
+        case 1:
+          $status_string = "Zaakceptowane";
+          break;
+        case 2:
+          $status_string = "Odrzucone";
+          break;
+      }
       echo <<< INFO
         <h3>Numer: $order[number]</h3><br>
+        <h5>Status: $status_string</h5><br>
         <h5>Zamawiający: $order[name] $order[surname]</h5><br> 
         <h5>Adres: $order[zipcode] $order[city]</h5><br>
         <h5>$order[street] $order[building]</h5><br>
