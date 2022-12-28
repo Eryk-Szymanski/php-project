@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 28, 2022 at 12:21 AM
+-- Generation Time: Dec 28, 2022 at 03:31 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.0
 
@@ -966,6 +966,7 @@ INSERT INTO `cities` (`id`, `state_id`, `city`) VALUES
 CREATE TABLE `orders` (
   `id` int(10) UNSIGNED NOT NULL,
   `number` varchar(30) NOT NULL,
+  `status` int(2) NOT NULL DEFAULT 0,
   `user_id` int(10) UNSIGNED NOT NULL,
   `products` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`products`)),
   `final_price` float UNSIGNED NOT NULL,
@@ -983,11 +984,10 @@ CREATE TABLE `orders` (
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`id`, `number`, `user_id`, `products`, `final_price`, `comment`, `name`, `surname`, `zipcode`, `city_id`, `street`, `building`, `created_at`) VALUES
-(1, '2712222200', 23, '[{\"wood\": 1, \"product_id\": 1}]', 23, 'szybko proszę', 'eryk', 'szymanski', '39-239', 1, 'koscianska', '1273a', '2022-12-27 21:49:26'),
-(2, '271220222335', 23, '[{\"wood\":1,\"product_id\":1}]', 0, 'a', 'a', 'a', 'a', 2, 'a', 'a', '2022-12-27 23:52:27'),
-(3, '271220222335', 23, '[{\"wood\":1,\"product_id\":1}]', 0, 'b', 'b', 'b', 'b', 2, 'b', 'b', '2022-12-27 23:53:22'),
-(4, '271220222335', 23, '[{\"wood\":1,\"product_id\":1}]', 0, 'c', 'c', 'c', 'c', 2, 'c', 'c', '2022-12-27 23:53:51');
+INSERT INTO `orders` (`id`, `number`, `status`, `user_id`, `products`, `final_price`, `comment`, `name`, `surname`, `zipcode`, `city_id`, `street`, `building`, `created_at`) VALUES
+(5, '20221228141220', 1, 23, '[{\"product_id\":1,\"quantity\":\"5\"},{\"product_id\":2,\"quantity\":\"4\"}]', 130, 'e', 'e', 'e', 'e', 2, 'e', 'e', '2022-12-28 14:15:20'),
+(6, '20221228141244', 2, 23, '[{\"product_id\":1,\"quantity\":\"5\"},{\"product_id\":2,\"quantity\":\"10\"}]', 220, 'ha', 'ha', 'ha', 'ha', 2, 'ha', 'ha', '2022-12-28 14:19:44'),
+(7, '20221228141230', 2, 23, '[{\"product_id\":1,\"quantity\":\"120\"},{\"product_id\":2,\"quantity\":\"500\"}]', 9180, 'er', 'er', 'er', 'er', 853, 'er', 'er', '2022-12-28 14:24:30');
 
 -- --------------------------------------------------------
 
@@ -1054,27 +1054,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `city_id`, `name`, `surname`, `email`, `role_id`, `pass`, `birthday`, `created_at`) VALUES
 (22, 776, 'eryk', 'szyman', 'ers@ers.pl', 1, '$argon2id$v=19$m=65536,t=4,p=1$cExzaEl4RzBSMC9HOFpMQw$ox/Tm2XxvZQUChdXiozblnD89YiUOkNPk681NCvKWpI', '2323-02-11', '2022-12-27 11:54:29'),
-(23, 853, 'user', 'userski', 'us@us.com', 3, '$argon2id$v=19$m=65536,t=4,p=1$ZjE0NmJ0MEJFaTQ0OGQzNQ$fQb3AInnRFo+wB3qGCJbcGd2/lKX03TyqnuSRrT7Nm8', '3212-12-31', '2022-12-27 13:46:03');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `woods`
---
-
-CREATE TABLE `woods` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(100) NOT NULL,
-  `description` varchar(300) NOT NULL,
-  `price_multiplier` float UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `woods`
---
-
-INSERT INTO `woods` (`id`, `name`, `description`, `price_multiplier`) VALUES
-(1, 'Dąb', 'Dobry, mocny', 1);
+(23, 853, 'user', 'userski', 'us@us.com', 3, '$argon2id$v=19$m=65536,t=4,p=1$ZjE0NmJ0MEJFaTQ0OGQzNQ$fQb3AInnRFo+wB3qGCJbcGd2/lKX03TyqnuSRrT7Nm8', '3212-12-31', '2022-12-27 13:46:03'),
+(24, 599, 'super', 'user', 'su@su.com', 2, '$argon2id$v=19$m=65536,t=4,p=1$clBweUN5NnRiOFd3OTZrWQ$D5OZ294UGbhBvx2EPZveXstO7TzCcn2982WsTClT7qw', '3211-12-31', '2022-12-28 14:36:41');
 
 --
 -- Indexes for dumped tables
@@ -1116,12 +1097,6 @@ ALTER TABLE `users`
   ADD KEY `role` (`role_id`);
 
 --
--- Indexes for table `woods`
---
-ALTER TABLE `woods`
-  ADD PRIMARY KEY (`id`);
-
---
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -1135,7 +1110,7 @@ ALTER TABLE `cities`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -1153,13 +1128,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
-
---
--- AUTO_INCREMENT for table `woods`
---
-ALTER TABLE `woods`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- Constraints for dumped tables

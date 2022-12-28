@@ -14,6 +14,15 @@
   
 </head>
 <body>
+  <?php if (isset($_SESSION['success'])) : ?>
+    <?php
+      echo <<< LOGOUT
+        <form action="../scripts/logout.php" method="post">
+            <button type="submit">Wyloguj</button>
+        </form>
+LOGOUT;
+    ?>
+
   <button><a href="./new-order.php">Zamów</a></button>
   <?php
     if(isset($_SESSION['cart'])) {
@@ -24,7 +33,8 @@
     $result = $mysqli->query($sql);
     while($product = $result->fetch_assoc()) {
       echo <<< INFO
-      <p>$product[name]</p>
+      <h3>$product[name]</h3>
+      <p>$product[price] zł</p>
       <form action="../scripts/add-product.php" method="post">
         <input type="number" value="$product[id]" hidden="true" name="product_id" />
         <input type="number" value="1" name="quantity"/>
@@ -33,5 +43,6 @@
 INFO;
       }
   ?>
+  <?php endif ?>
 </body>
 </html>

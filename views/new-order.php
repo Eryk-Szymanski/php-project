@@ -14,6 +14,14 @@
   
 </head>
 <body>
+  <?php if (isset($_SESSION['success'])) : ?>
+    <?php 
+      echo <<< LOGOUT
+        <form action="../scripts/logout.php" method="post">
+            <button type="submit">Wyloguj</button>
+        </form>
+LOGOUT;
+    ?>
     <form action="../scripts/new-order.php" method="post">
         <input type="text"  placeholder="Imię" name="name">
         <input type="text"  placeholder="Nazwisko" name="surname">
@@ -57,14 +65,37 @@
           <!-- /.col -->
         </div>
       </form>
+      <table>
+        <tr>
+          <th>Produkt</th>
+          <th>Ilość</th>
+          <th>Cena za sztukę</th>
+          <th>Cena całkowita</th>
+        </tr>
     <?php
-        if(isset($_SESSION['cart'])) {
-            foreach($_SESSION['cart'] as $key => $value) {
-                echo $key;
-                echo $value;
-                echo "<br>";
-            }
+      if(isset($_SESSION['cart'])) {
+        require_once '../scripts/connect.php';
+        $cart_value = 0;
+        foreach($_SESSION['cart'] as $key => $value) {
+          $sql = "SELECT name, price FROM `products` WHERE id = $key";
+          $result = $mysqli->query($sql);
+          $product = $result->fetch_assoc();
+          $final_price = intval($value) * intval($product['price']);
+          $cart_value += $final_price;
+          echo <<< INFO
+          <tr>
+            <td>$product[name]</td>
+            <td>$value</td>
+            <td>$product[price] zł</td>
+            <td>$final_price zł</td>
+          </tr>
+INFO;
         }
+        $_SESSION['cart_value'] = $cart_value;
+        echo "<h7>Cena końcowa: $_SESSION[cart_value] zł</h7>";
+      }
     ?>
+    </table>
+    <?php endif ?>
 </body>
 </html>
