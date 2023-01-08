@@ -14,7 +14,7 @@
 <div class="register-box">
   <div class="card card-outline card-primary">
     <div class="card-header text-center">
-      <a href="../AdminLTE/index2.html" class="h1"><b>Admin</b>LTE</a>
+    <a href="../AdminLTE/index2.html" class="h1"><b>Jeryk</b>Drzewo</a>
     </div>
     <div class="card-body">
       <p class="login-box-msg">Rejestracja użytkownika</p>
@@ -112,7 +112,7 @@
 
           <!-- /.col -->
           <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block">Register</button>
+            <button type="submit" class="btn btn-primary btn-block">Utwórz</button>
           </div>
           <!-- /.col -->
         </div>
@@ -121,15 +121,15 @@
       <div class="social-auth-links text-center">
         <a href="#" class="btn btn-block btn-primary">
           <i class="fab fa-facebook mr-2"></i>
-          Sign up using Facebook
+          Zaloguj się z Facebook
         </a>
         <a href="#" class="btn btn-block btn-danger">
           <i class="fab fa-google-plus mr-2"></i>
-          Sign up using Google+
+          Zaloguj się z Google+
         </a>
       </div>
 
-      <a href="../" class="text-center">I already have a membership</a>
+      <a href="../" class="text-center">Mam już konto</a>
     </div>
     <!-- /.form-box -->
   </div><!-- /.card -->

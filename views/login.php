@@ -74,10 +74,10 @@ INFO;
   <!-- /.login-logo -->
   <div class="card card-outline card-primary">
     <div class="card-header text-center">
-      <a href="./" class="h1"><b>Admin</b>LTE</a>
+      <a href="./" class="h1"><b>Jeryk</b>Drzewo</a>
     </div>
     <div class="card-body">
-      <p class="login-box-msg">Sign in to start your session</p>
+      <p class="login-box-msg">Zaloguj się do sesji</p>
 
       <form action="./scripts/login.php" method="post">
         <div class="input-group mb-3">
@@ -89,7 +89,7 @@ INFO;
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Password" name="pass">
+          <input type="password" class="form-control" placeholder="Hasło" name="pass">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -101,13 +101,13 @@ INFO;
             <div class="icheck-primary">
               <input type="checkbox" id="remember">
               <label for="remember">
-                Remember Me
+                Pamiętaj mnie
               </label>
             </div>
           </div>
           <!-- /.col -->
           <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+            <button type="submit" class="btn btn-primary btn-block">Zaloguj</button>
           </div>
           <!-- /.col -->
         </div>
@@ -115,19 +115,19 @@ INFO;
 
       <div class="social-auth-links text-center mt-2 mb-3">
         <a href="#" class="btn btn-block btn-primary">
-          <i class="fab fa-facebook mr-2"></i> Sign in using Facebook
+          <i class="fab fa-facebook mr-2"></i> Zaloguj się z Facebook
         </a>
         <a href="#" class="btn btn-block btn-danger">
-          <i class="fab fa-google-plus mr-2"></i> Sign in using Google+
+          <i class="fab fa-google-plus mr-2"></i> Zaloguj się z Google+
         </a>
       </div>
       <!-- /.social-auth-links -->
 
       <p class="mb-1">
-        <a href="./views/forgot-password.php">I forgot my password</a>
+        <a href="./views/forgot-password.php">Zapomniałem hasła</a>
       </p>
       <p class="mb-0">
-        <a href="./views/register.php" class="text-center">Register a new membership</a>
+        <a href="./views/register.php" class="text-center">Utwórz konto</a>
       </p>
     </div>
     <!-- /.card-body -->

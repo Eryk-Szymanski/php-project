@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 28, 2022 at 05:20 PM
+-- Generation Time: Jan 08, 2023 at 01:50 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.0
 
@@ -989,7 +989,9 @@ INSERT INTO `orders` (`id`, `number`, `status`, `user_id`, `products`, `final_pr
 (6, '20221228141244', 2, 23, '[{\"product_id\":1,\"quantity\":\"5\"},{\"product_id\":2,\"quantity\":\"10\"}]', 220, 'ha', 'ha', 'ha', 'ha', 2, 'ha', 'ha', '2022-12-28 14:19:44'),
 (7, '20221228141230', 2, 23, '[{\"product_id\":1,\"quantity\":\"120\"},{\"product_id\":2,\"quantity\":\"500\"}]', 9180, 'er', 'er', 'er', 'er', 853, 'er', 'er', '2022-12-28 14:24:30'),
 (8, '20221228171255', 1, 25, '[{\"product_id\":1,\"quantity\":\"8\"},{\"product_id\":2,\"quantity\":\"7\"}]', 217, 'hehe', 'jaro', 'uzaro', '127381', 2, 'abc', 'ddef', '2022-12-28 17:14:55'),
-(9, '20221228171252', 0, 25, '[{\"product_id\":1,\"quantity\":\"1\"},{\"product_id\":2,\"quantity\":\"5\"}]', 89, 'ghi', 'jars', 'uzars', '21837', 2, 'abc', 'def', '2022-12-28 17:19:52');
+(9, '20221228171252', 1, 25, '[{\"product_id\":1,\"quantity\":\"1\"},{\"product_id\":2,\"quantity\":\"5\"}]', 89, 'ghi', 'jars', 'uzars', '21837', 2, 'abc', 'def', '2022-12-28 17:19:52'),
+(10, '20230108130111', 0, 25, '[{\"product_id\":2,\"quantity\":\"1\"},{\"product_id\":3,\"quantity\":\"1\"}]', 71, 'e', 'e', 'ee', 'e', 2, 'e', 'e', '2023-01-08 13:27:11'),
+(11, '20230108130116', 0, 24, '[{\"product_id\":1,\"quantity\":\"5\"}]', 70, 'abc', 'abc', 'abc', '123', 2, 'abc', 'abc', '2023-01-08 13:49:16');
 
 -- --------------------------------------------------------
 
@@ -1010,7 +1012,11 @@ CREATE TABLE `products` (
 
 INSERT INTO `products` (`id`, `name`, `description`, `price`) VALUES
 (1, 'Deski', 'Cienkie, mocne', 14),
-(2, 'Klapki', 'Dobre do palenia', 15);
+(2, 'Trociny', 'Dobre do palenia', 15),
+(3, 'Dąb', 'Dobre drzewo', 56),
+(4, 'Belka', 'Silna belka', 40),
+(5, 'Brzoza', 'Biała brzoza', 100),
+(6, 'Choinka', 'Na święta', 76);
 
 -- --------------------------------------------------------
 
@@ -1113,13 +1119,13 @@ ALTER TABLE `cities`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `roles`

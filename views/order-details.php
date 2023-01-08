@@ -14,11 +14,14 @@
   
 </head>
 <body>
+<div class="p-2">
   <?php if (isset($_SESSION['success'])) : ?>
     <?php
       echo <<< LOGOUT
         <form action="../scripts/logout.php" method="post">
-            <button type="submit">Wyloguj</button>
+        <div class="col-md-1">
+        <button type="submit" class="btn btn-info btn-block btn-flat"> Wyloguj </button>
+         </div> <br>
         </form>
 LOGOUT;
     if (isset($_GET['number'])) {
@@ -39,14 +42,33 @@ LOGOUT;
           break;
       }
       echo <<< INFO
-        <h3>Numer: $order[number]</h3><br>
-        <h5>Status: $status_string</h5><br>
-        <h5>Zamawiający: $order[name] $order[surname]</h5><br> 
-        <h5>Adres: $order[zipcode] $order[city]</h5><br>
-        <h5>$order[street] $order[building]</h5><br>
-        <h5>Wartość zamówienia: $order[final_price] zł</h5><br>
-        <h5>Utworzono: $order[created_at]</h5><br>
-        <table>
+      <div class="col-md-3">
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Numer: $order[number]</h3>
+
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                </div>
+                <!-- /.card-tools -->
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+              <h5>Status: $status_string</h5><br>
+              <h5>Zamawiający: $order[name] $order[surname]</h5><br> 
+              <h5>Adres: $order[zipcode] $order[city]</h5><br>
+              <h5>$order[street] $order[building]</h5><br>
+              <h5>Wartość zamówienia: $order[final_price] zł</h5><br>
+              <h5>Utworzono: $order[created_at]</h5><br>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+       
+        <table class="table table-striped">
           <tr>
             <th>Nazwa</th>
             <th>Ilość</th>
@@ -71,25 +93,38 @@ INFO;
       }
       echo "</table>";
     }
+    echo "<div class='d-inline-flex p-2'>";
     if (isset($_SESSION['user_role'])) {
       if($_SESSION['user_role'] == 'superuser') {
         echo <<< ACCEPT
-        <form action="../scripts/accept-order.php" method="post">
+        <form class="p-2" action="../scripts/accept-order.php" method="post">
           <input type="text" value="accept" hidden="true" name="decision" />
           <input type="text" value="$_GET[number]" hidden="true" name="number" />
-          <button type="submit">Zaakceptuj</button>
+          <div>
+          <button type="submit" class="btn btn-info btn-block btn-flat"> Zaakceptuj </button>
+           </div> 
         </form>
 ACCEPT;
         echo <<< REJECT
-        <form action="../scripts/accept-order.php" method="post">
+        <form class="p-2" action="../scripts/accept-order.php" method="post">
           <input type="text" value="reject" hidden="true" name="decision" />
           <input type="text" value="$_GET[number]" hidden="true" name="number" />
-          <button type="submit">Odrzuć</button>
+          <div>
+          <button type="submit" class="btn btn-info btn-block btn-flat">Odrzuć </button>
+           </div>
         </form>
+        </div>
 REJECT;
       }
     }
   ?>
   <?php endif ?>
+</div>
+<!-- jQuery -->
+<script src="./AdminLTE/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="./AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="./AdminLTE/dist/js/adminlte.min.js"></script>
 </body>
 </html>
